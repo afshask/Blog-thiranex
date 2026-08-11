@@ -8,6 +8,7 @@ const connectDB = require("./config/db");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const authRoutes = require("./routes/authRoutes");
 
 // Connect MongoDB
 connectDB();
@@ -27,6 +28,9 @@ app.use(
 
 // Static files
 app.use(express.static(path.join(__dirname, "public")));
+
+// Authentication routes
+app.use("/auth", authRoutes);
 
 // Test route
 app.get("/", (req, res) => {
