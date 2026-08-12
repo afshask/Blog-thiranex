@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const MongoStore = require("connect-mongo").default;
 const path = require("path");
 require("dotenv").config();
 
@@ -24,10 +25,18 @@ app.use(
     session({
         secret: process.env.SESSION_SECRET,
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGO_URI,
+            collectionName: "sessions"
+        }),
+
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24
+        }
     })
 );
-
 // Static files
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -43,11 +52,25 @@ app.get("/register", (req, res) => {
 app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "login.html"));
 });
+
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
+
 app.get("/create-post", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "create-post.html"));
+});
+
+app.get("/post/:id", (req, res) => {
+    res.sendFile(
+        path.join(__dirname, "views", "post.html")
+    );
+});
+
+app.get("/edit-post/:id", (req, res) => {
+    res.sendFile(
+        path.join(__dirname, "views", "edit-post.html")
+    );
 });
 
 app.listen(PORT, () => {

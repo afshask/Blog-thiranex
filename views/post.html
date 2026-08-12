@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blog Post - Blog Platform</title>
+
+<link rel="stylesheet" href="/css/post.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <h1>My Blog</h1>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/create-post">Create Post</a>
+            <a href="/auth/logout">Logout</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Main Content -->
+    <main class="post-page">
+
+        <!-- Blog Post -->
+        <article id="postContainer">
+
+            <p>Loading post...</p>
+
+        </article>
+
+
+        <!-- Comments Section -->
+        <section class="comments-section">
+
+            <h2>Comments</h2>
+
+
+            <!-- Add Comment Form -->
+            <form id="commentForm">
+
+                <textarea
+                    id="commentContent"
+                    placeholder="Write a comment..."
+                    rows="4"
+                    required
+                ></textarea>
+
+                <button type="submit">
+                    Add Comment
+                </button>
+
+            </form>
+
+
+            <p id="commentMessage"></p>
+
+
+            <!-- Existing Comments -->
+            <div id="commentsContainer">
+
+                <p>Loading comments...</p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="/js/post.js"></script>
+
+</body>
+
+</html>

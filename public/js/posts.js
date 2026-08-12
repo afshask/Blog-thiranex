@@ -3,73 +3,132 @@ const postForm = document.getElementById("postForm");
 
 
 // ===============================
+// LOAD CURRENT USER
+// ===============================
+
+async function getCurrentUser() {
+
+    try {
+
+        const response = await fetch("/auth/current-user");
+
+        if (!response.ok) {
+            return null;
+        }
+
+        const data = await response.json();
+
+        return data.user;
+
+    } catch (error) {
+
+        console.error(error);
+
+        return null;
+    }
+}
+
+
+// ===============================
 // LOAD ALL POSTS
 // ===============================
 
-if (postsContainer) {
+async function loadPosts() {
 
-    async function loadPosts() {
+    if (!postsContainer) {
+        return;
+    }
 
-        try {
+    try {
 
-            const response = await fetch("/posts");
+        const currentUser = await getCurrentUser();
 
-            const posts = await response.json();
+        const response = await fetch("/posts");
 
-            if (posts.length === 0) {
+        const posts = await response.json();
 
-                postsContainer.innerHTML = `
-                    <div class="empty-message">
-                        <h3>No posts yet</h3>
-                        <p>Be the first person to create a blog post!</p>
-                    </div>
+
+        if (posts.length === 0) {
+
+            postsContainer.innerHTML = `
+                <div class="empty-message">
+                    <h3>No posts yet</h3>
+                    <p>Be the first person to create a blog post!</p>
+                </div>
+            `;
+
+            return;
+        }
+
+
+        postsContainer.innerHTML = posts.map(post => {
+
+            let actionButtons = `
+                <a
+                    class="read-more"
+                    href="/post/${post._id}"
+                >
+                    Read More
+                </a>
+            `;
+
+
+            // Show Edit/Delete only to the post owner
+            if (
+                currentUser &&
+                currentUser.id === post.author._id
+            ) {
+
+                actionButtons += `
+                    <a
+                        class="edit-button"
+                        href="/edit-post/${post._id}"
+                    >
+                        Edit
+                    </a>
+
+                    <button
+                        class="delete-button"
+                        onclick="deletePost('${post._id}')"
+                    >
+                        Delete
+                    </button>
                 `;
-
-                return;
             }
 
 
-            postsContainer.innerHTML = posts.map(post => {
+            return `
+                <article class="post-card">
 
-                return `
-                    <article class="post-card">
+                    <h2>${post.title}</h2>
 
-                        <h2>${post.title}</h2>
+                    <p class="post-author">
+                        By ${post.author.name}
+                    </p>
 
-                        <p class="post-author">
-                            By ${post.author.name}
-                        </p>
+                    <p class="post-content">
+                        ${post.content}
+                    </p>
 
-                        <p class="post-content">
-                            ${post.content}
-                        </p>
+                    <div class="post-actions">
+                        ${actionButtons}
+                    </div>
 
-                        <a
-                            class="read-more"
-                            href="/post/${post._id}"
-                        >
-                            Read More
-                        </a>
-
-                    </article>
-                `;
-
-            }).join("");
-
-        } catch (error) {
-
-            console.error(error);
-
-            postsContainer.innerHTML = `
-                <p>Failed to load posts.</p>
+                </article>
             `;
-        }
+
+        }).join("");
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        postsContainer.innerHTML = `
+            <p>Failed to load posts.</p>
+        `;
     }
-
-
-    loadPosts();
 }
-
 
 
 // ===============================
@@ -82,9 +141,11 @@ if (postForm) {
 
         event.preventDefault();
 
+        const title =
+            document.getElementById("title").value;
 
-        const title = document.getElementById("title").value;
-        const content = document.getElementById("content").value;
+        const content =
+            document.getElementById("content").value;
 
 
         try {
@@ -134,5 +195,60 @@ if (postForm) {
         }
 
     });
-
 }
+
+
+// ===============================
+// DELETE POST
+// ===============================
+
+async function deletePost(postId) {
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this post?"
+    );
+
+    if (!confirmDelete) {
+        return;
+    }
+
+
+    try {
+
+        const response = await fetch(
+            `/posts/${postId}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+
+        const result = await response.text();
+
+
+        if (response.ok) {
+
+            alert("Post deleted successfully!");
+
+            await loadPosts();
+
+        } else {
+
+            alert(result);
+        }
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Something went wrong.");
+    }
+}
+
+
+// ===============================
+// LOAD POSTS
+// ===============================
+
+loadPosts();

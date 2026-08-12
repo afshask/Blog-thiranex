@@ -1,0 +1,324 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    background: #c0e6fd;
+
+    color: #000f22;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    min-height: 75px;
+
+    padding: 0 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #000f22;
+
+    box-shadow:
+        0 5px 20px rgba(0, 15, 34, 0.25);
+}
+
+.navbar h1 {
+    color: #c0e6fd;
+
+    font-size: 27px;
+}
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.nav-links a {
+    padding: 9px 16px;
+
+    border-radius: 8px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    background: #1b3554;
+}
+
+
+/* =========================
+   POST PAGE
+========================= */
+
+.post-page {
+    width: 90%;
+    max-width: 900px;
+
+    margin: 50px auto;
+}
+
+
+/* =========================
+   POST
+========================= */
+
+#postContainer {
+    padding: 45px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 15, 34, 0.15);
+}
+
+#postContainer h1 {
+    margin-bottom: 12px;
+
+    color: #1b3554;
+
+    font-size: 38px;
+
+    line-height: 1.2;
+}
+
+#postContainer .post-author {
+    margin-bottom: 30px;
+
+    color: #5b86b6;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+#postContainer .post-content {
+    color: #3f6593;
+
+    font-size: 17px;
+
+    line-height: 1.9;
+
+    white-space: pre-wrap;
+}
+
+
+/* =========================
+   COMMENTS SECTION
+========================= */
+
+.comments-section {
+    margin-top: 30px;
+
+    padding: 35px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 15, 34, 0.12);
+}
+
+.comments-section h2 {
+    margin-bottom: 22px;
+
+    color: #1b3554;
+
+    font-size: 26px;
+}
+
+
+/* =========================
+   COMMENT FORM
+========================= */
+
+#commentForm {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+#commentContent {
+    width: 100%;
+
+    min-height: 120px;
+
+    padding: 15px;
+
+    border: 2px solid #c0e6fd;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #f8fcff;
+
+    color: #1b3554;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    resize: vertical;
+
+    transition: 0.3s;
+}
+
+#commentContent:focus {
+    border-color: #5b86b6;
+
+    box-shadow:
+        0 0 0 3px rgba(91, 134, 182, 0.15);
+}
+
+#commentForm button {
+    align-self: flex-start;
+
+    padding: 11px 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #3f6593;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+#commentForm button:hover {
+    background: #1b3554;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   COMMENT MESSAGE
+========================= */
+
+#commentMessage {
+    min-height: 20px;
+
+    margin-top: 15px;
+
+    color: #3f6593;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   COMMENTS
+========================= */
+
+#commentsContainer {
+    margin-top: 25px;
+}
+
+.comment {
+    margin-top: 15px;
+
+    padding: 18px;
+
+    border-left: 4px solid #5b86b6;
+
+    border-radius: 10px;
+
+    background: #f3f8fc;
+}
+
+.comment strong {
+    color: #1b3554;
+
+    font-size: 15px;
+}
+
+.comment p {
+    margin-top: 6px;
+
+    color: #3f6593;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .navbar {
+        padding: 15px 5%;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .nav-links {
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+    .post-page {
+        width: 92%;
+
+        margin: 30px auto;
+    }
+
+    #postContainer,
+    .comments-section {
+        padding: 25px;
+    }
+
+    #postContainer h1 {
+        font-size: 29px;
+    }
+
+    #postContainer .post-content {
+        font-size: 16px;
+    }
+
+    #commentForm button {
+        width: 100%;
+    }
+}

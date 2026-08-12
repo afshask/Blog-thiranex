@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    background: #c0e6fd;
+
+    color: #000f22;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    min-height: 75px;
+
+    padding: 0 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #000f22;
+
+    box-shadow: 0 5px 20px rgba(0, 15, 34, 0.25);
+}
+
+.navbar h1 {
+    color: #c0e6fd;
+
+    font-size: 27px;
+}
+
+.navbar > a {
+    padding: 9px 16px;
+
+    border: 1px solid #5b86b6;
+    border-radius: 8px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.navbar > a:hover {
+    background: #1b3554;
+}
+
+
+/* =========================
+   FORM CONTAINER
+========================= */
+
+.form-container {
+    width: 90%;
+    max-width: 750px;
+
+    margin: 55px auto;
+
+    padding: 40px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 15, 34, 0.15);
+}
+
+.form-container h2 {
+    margin-bottom: 28px;
+
+    color: #1b3554;
+
+    font-size: 30px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.form-container input,
+.form-container textarea {
+    width: 100%;
+
+    padding: 15px 16px;
+
+    border: 2px solid #c0e6fd;
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #f8fcff;
+
+    color: #1b3554;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+    border-color: #5b86b6;
+
+    box-shadow:
+        0 0 0 3px rgba(91, 134, 182, 0.15);
+}
+
+.form-container textarea {
+    min-height: 280px;
+
+    resize: vertical;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.form-container button {
+    width: fit-content;
+
+    padding: 13px 25px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #3f6593;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.form-container button:hover {
+    background: #1b3554;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message {
+    min-height: 20px;
+
+    margin-top: 18px;
+
+    color: #3f6593;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 15px 5%;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .form-container {
+        width: 92%;
+
+        margin: 30px auto;
+
+        padding: 25px;
+    }
+
+    .form-container h2 {
+        font-size: 25px;
+    }
+
+    .form-container textarea {
+        min-height: 220px;
+    }
+
+    .form-container button {
+        width: 100%;
+    }
+}
