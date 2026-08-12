@@ -36,8 +36,18 @@ app.use("/auth", authRoutes);
 app.use("/posts", postRoutes);
 app.use("/comments", commentRoutes);
 // Test route
+app.get("/register", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "register.html"));
+});
+
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "login.html"));
+});
 app.get("/", (req, res) => {
-    res.send("Blog Platform Backend is Running!");
+    res.sendFile(path.join(__dirname, "views", "index.html"));
+});
+app.get("/create-post", (req, res) => {
+    res.sendFile(path.join(__dirname, "views", "create-post.html"));
 });
 
 app.listen(PORT, () => {
