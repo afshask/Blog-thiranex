@@ -10,6 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 
 // Connect MongoDB
 connectDB();
@@ -33,7 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Authentication routes
 app.use("/auth", authRoutes);
 app.use("/posts", postRoutes);
-
+app.use("/comments", commentRoutes);
 // Test route
 app.get("/", (req, res) => {
     res.send("Blog Platform Backend is Running!");
