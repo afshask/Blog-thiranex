@@ -54,25 +54,47 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "index.html"));
+
+    if (!req.session.userId) {
+        return res.redirect("/login");
+    }
+
+    res.sendFile(
+        path.join(__dirname, "views", "index.html")
+    );
 });
 
 app.get("/create-post", (req, res) => {
-    res.sendFile(path.join(__dirname, "views", "create-post.html"));
+
+    if (!req.session.userId) {
+        return res.redirect("/login");
+    }
+
+    res.sendFile(
+        path.join(__dirname, "views", "create-post.html")
+    );
 });
 
 app.get("/post/:id", (req, res) => {
+
+    if (!req.session.userId) {
+        return res.redirect("/login");
+    }
+
     res.sendFile(
         path.join(__dirname, "views", "post.html")
     );
 });
-
 app.get("/edit-post/:id", (req, res) => {
+
+    if (!req.session.userId) {
+        return res.redirect("/login");
+    }
+
     res.sendFile(
         path.join(__dirname, "views", "edit-post.html")
     );
 });
-
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

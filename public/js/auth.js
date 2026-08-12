@@ -74,3 +74,30 @@ if (loginForm) {
         }
     });
 }
+// Logout
+
+const logoutLink = document.getElementById("logoutLink");
+
+if (logoutLink) {
+
+    logoutLink.addEventListener("click", async (event) => {
+
+        event.preventDefault();
+
+        const response = await fetch("/auth/logout");
+
+        const message = await response.text();
+
+        if (response.ok) {
+
+            alert("Logged out successfully!");
+
+            window.location.href = "/login";
+
+        } else {
+
+            alert(message);
+        }
+
+    });
+}

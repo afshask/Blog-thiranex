@@ -22,6 +22,7 @@ router.post(
 // Get comments for a post
 router.get(
     "/post/:postId",
+    authMiddleware,
     getComments
 );
 

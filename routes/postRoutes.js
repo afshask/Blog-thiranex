@@ -16,14 +16,18 @@ const authMiddleware = require("../middleware/authMiddleware");
 // Create post
 router.post("/", authMiddleware, createPost);
 
+
 // Get all posts
-router.get("/", getAllPosts);
+router.get("/", authMiddleware, getAllPosts);
+
 
 // Get single post
-router.get("/:id", getPost);
+router.get("/:id", authMiddleware, getPost);
+
 
 // Update post
 router.put("/:id", authMiddleware, updatePost);
+
 
 // Delete post
 router.delete("/:id", authMiddleware, deletePost);
